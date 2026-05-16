@@ -1,0 +1,4 @@
+interface:
+  display_name: "飞书 Agent 连接"
+  short_description: "安装并连接官方飞书 CLI，授权云文档和多维表格自动化"
+  default_prompt: "连接飞书并完成云文档自动化授权"
