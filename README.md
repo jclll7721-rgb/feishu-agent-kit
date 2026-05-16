@@ -2,6 +2,22 @@
 
 这是一个可分发给其他人的轻量工具包，用来把官方 `lark-cli` 接入 Codex、Claude Code、Cursor 或其他支持 `SKILL.md` 的 Agent。拿到这个文件夹的人只需要安装、完成飞书页面授权，就能让 Agent 操作飞书云文档、云空间、电子表格、多维表格、Wiki 和 Markdown。
 
+## 直接给 Agent 的提示词
+
+如果对方使用 OpenClaw、Hermes、Codex 或其他能执行 shell 命令的 Agent，最稳的做法不是只发仓库地址，而是把下面这段完整发给它：
+
+```text
+请打开并使用这个仓库完成飞书自动化连接：
+https://github.com/jclll7721-rgb/feishu-agent-kit
+
+请按 README 执行安装。我的环境是 OpenClaw 时，优先使用：
+curl -fsSL https://raw.githubusercontent.com/jclll7721-rgb/feishu-agent-kit/main/install.sh | bash
+python3 ~/.feishu-agent-kit/skills/feishu-agent-connect/scripts/setup_feishu_agent.py bind-agent --source openclaw --identity user-default
+python3 ~/.feishu-agent-kit/skills/feishu-agent-connect/scripts/setup_feishu_agent.py auth-cloud-docs
+
+过程中如果出现飞书或 GitHub 授权页面，请把链接或设备码发给我确认；不要输出 app_secret、access token、refresh token。
+```
+
 ## 组成
 
 - `skills/feishu-agent-connect/SKILL.md`：给 Agent 读的路由 skill，负责低 token 地指挥官方 `lark-cli` 和官方 `lark-*` skills。
