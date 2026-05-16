@@ -4,15 +4,27 @@
 
 ## 直接给 Agent 的提示词
 
-如果对方使用 OpenClaw、Hermes、Codex 或其他能执行 shell 命令的 Agent，最稳的做法不是只发仓库地址，而是把下面这段完整发给它：
+如果对方使用 OpenClaw、Hermes、Codex 或其他能执行 shell 命令的 Agent，最稳的做法不是只发裸仓库地址，而是把下面这段完整发给它：
 
 ```text
 请打开并使用这个仓库完成飞书自动化连接：
 https://github.com/jclll7721-rgb/feishu-agent-kit
 
-请按 README 执行安装。我的环境是 OpenClaw 时，优先使用：
+请按 README 执行安装，并先判断当前环境是 Codex、OpenClaw、Hermes 还是普通本地 Agent。
+
+通用安装命令：
 curl -fsSL https://raw.githubusercontent.com/jclll7721-rgb/feishu-agent-kit/main/install.sh | bash
+
+如果是 Codex 或普通本地 Agent，使用：
+python3 ~/.feishu-agent-kit/skills/feishu-agent-connect/scripts/setup_feishu_agent.py init-app
+python3 ~/.feishu-agent-kit/skills/feishu-agent-connect/scripts/setup_feishu_agent.py auth-cloud-docs
+
+如果是 OpenClaw，使用：
 python3 ~/.feishu-agent-kit/skills/feishu-agent-connect/scripts/setup_feishu_agent.py bind-agent --source openclaw --identity user-default
+python3 ~/.feishu-agent-kit/skills/feishu-agent-connect/scripts/setup_feishu_agent.py auth-cloud-docs
+
+如果是 Hermes，使用：
+python3 ~/.feishu-agent-kit/skills/feishu-agent-connect/scripts/setup_feishu_agent.py bind-agent --source hermes --identity user-default
 python3 ~/.feishu-agent-kit/skills/feishu-agent-connect/scripts/setup_feishu_agent.py auth-cloud-docs
 
 过程中如果出现飞书或 GitHub 授权页面，请把链接或设备码发给我确认；不要输出 app_secret、access token、refresh token。
